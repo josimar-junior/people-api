@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.crud.model.Pessoa;
+import br.com.crud.repository.filter.PessoaFilter;
 import br.com.crud.service.PessoaService;
 
 @RestController
@@ -29,8 +30,8 @@ public class PessoaResource {
 	private PessoaService pessoaService;
 	
 	@GetMapping
-	public ResponseEntity<List<Pessoa>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.listarTodos());
+	public ResponseEntity<List<Pessoa>> filtrar(PessoaFilter filter) {
+		return ResponseEntity.status(HttpStatus.OK).body(pessoaService.filtrar(filter));
 	}
 	
 	@PostMapping

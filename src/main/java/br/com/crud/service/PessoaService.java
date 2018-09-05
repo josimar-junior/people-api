@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.crud.model.Pessoa;
 import br.com.crud.repository.PessoaRepository;
+import br.com.crud.repository.filter.PessoaFilter;
 import br.com.crud.service.exception.PessoaNaoEncontradaException;
 
 @Service
@@ -24,8 +25,8 @@ public class PessoaService {
 		return pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException("Pessoa não encontrada"));
 	}
 
-	public List<Pessoa> listarTodos() {
-		return pessoaRepository.findAll();
+	public List<Pessoa> filtrar(PessoaFilter filter) {
+		return pessoaRepository.filtrar(filter);
 	}
 
 	public void deletar(Long id) {

@@ -1,8 +1,8 @@
 package br.com.crud.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.crud.model.Pessoa;
@@ -25,8 +25,8 @@ public class PessoaService {
 		return pessoaRepository.findById(id).orElseThrow(() -> new PessoaNaoEncontradaException("Pessoa não encontrada"));
 	}
 
-	public List<Pessoa> filtrar(PessoaFilter filter) {
-		return pessoaRepository.filtrar(filter);
+	public Page<Pessoa> filtrar(PessoaFilter filter, Pageable pageable) {
+		return pessoaRepository.filtrar(filter, pageable);
 	}
 
 	public void deletar(Long id) {

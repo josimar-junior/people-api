@@ -1,11 +1,12 @@
 package br.com.crud.repository.pessoa;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import br.com.crud.model.Pessoa;
 import br.com.crud.repository.filter.PessoaFilter;
 
 public interface PessoaRepositoryQuery {
 
-	List<Pessoa> filtrar(PessoaFilter filter);
+	Page<Pessoa> filtrar(PessoaFilter filter, Pageable pageable);
 }

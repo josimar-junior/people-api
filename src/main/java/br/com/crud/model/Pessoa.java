@@ -2,6 +2,7 @@ package br.com.crud.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +15,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="pessoa")
@@ -36,6 +40,7 @@ public class Pessoa implements Serializable {
 	@CPF(message = "CPF inválido")
 	private String cpf;
 	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name="data_nascimento")
 	private LocalDate dataNascimento;
 	
@@ -119,4 +124,14 @@ public class Pessoa implements Serializable {
 		return true;
 	}
 
+	@Transient
+	public long getIdade() {
+		LocalDate hoje = LocalDate.now();
+		return Period.between(dataNascimento, hoje).getYears();
+	}
+	
+	@Transient
+	public long getQuantidadeTelefones() {
+		return telefones.size();
+	}
 }

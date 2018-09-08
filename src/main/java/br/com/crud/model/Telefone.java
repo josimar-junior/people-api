@@ -23,10 +23,8 @@ public class Telefone implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "DDD é obrigatório")
 	private String ddd;
 
-	@NotBlank(message = "Número é obrigatório")
 	private String numero;
 
 	@JsonIgnore

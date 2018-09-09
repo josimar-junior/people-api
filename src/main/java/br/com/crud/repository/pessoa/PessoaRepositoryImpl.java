@@ -33,6 +33,8 @@ public class PessoaRepositoryImpl implements PessoaRepositoryQuery {
 		Predicate[] predicates = criarRestricoes(filter, builder, root);
 		criteria.where(predicates);
 		
+		//criteria.orderBy(builder.asc(root.get("nome")));
+		
 		TypedQuery<Pessoa> query = manager.createQuery(criteria);
 		
 		adicionarRestricoesPaginacao(query, pageable);
